@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Agende sua Aula{% endblock %}
+{% block content %}
+<h1>Agendamento de Aula</h1>
+<form method="POST" action="{{ url_for('booking') }}">
+  <div class="form-group">
+    <label for="name">Nome</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{ current_user.name }}" required>
+  </div>
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input type="email" class="form-control" id="email" name="email" value="{{ current_user.email }}" required>
+  </div>
+  <div class="form-group">
+    <label for="teacher_id">Professor</label>
+    <select class="form-control" id="teacher_id" name="teacher_id" required>
+      {% for teacher in teachers %}
+        <option value="{{ teacher.id }}">{{ teacher.name }} - {{ teacher.email }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="date">Data da Aula</label>
+    <input type="date" class="form-control" id="date" name="date" required>
+  </div>
+  <div class="form-group">
+    <label for="start_time">Horário de Início</label>
+    <input type="time" class="form-control" id="start_time" name="start_time" required>
+  </div>
+  <div class="form-group">
+    <label for="end_time">Horário de Término</label>
+    <input type="time" class="form-control" id="end_time" name="end_time" required>
+  </div>
+  <p>Valor por hora: R$ {{ config.hourly_rate }}</p>
+  <button type="submit" class="btn btn-primary">Agendar Aula</button>
+</form>
+
+<hr>
+<h3>Suas Aulas Agendadas</h3>
+{% if appointments %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Horário</th>
+        <th>Total (R$)</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for app in appointments %}
+      <tr>
+        <td>{{ app.id }}</td>
+        <td>{{ app.appointment_date }}</td>
+        <td>{{ app.start_time }} - {{ app.end_time }}</td>
+        <td>{{ app.total }}</td>
+        <td>
+          <a href="{{ url_for('cancel', id=app.id) }}" class="btn btn-warning btn-sm" onclick="return confirm('Deseja cancelar este agendamento?')">Cancelar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>Nenhuma aula agendada.</p>
+{% endif %}
+{% endblock %}

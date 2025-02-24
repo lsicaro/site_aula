@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<h1>Login</h1>
+<form method="POST" action="{{ url_for('login') }}">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Seu email" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Senha</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Sua senha" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Entrar</button>
+</form>
+<p class="mt-2">Não tem conta? Cadastre-se:</p>
+<a href="{{ url_for('register') }}">Cadastro de Aluno</a> | 
+<a href="{{ url_for('register_teacher') }}">Cadastro de Professor</a>
+{% endblock %}

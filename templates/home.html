@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="jumbotron text-center">
+  <h1>Bem-vindo ao Sistema de Aulas</h1>
+  <p>Escolha uma opção:</p>
+  <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Login</a>
+  <hr>
+  <p>Não tem conta? Cadastre-se:</p>
+  <a href="{{ url_for('register') }}" class="btn btn-secondary">Cadastro de Aluno</a>
+  <a href="{{ url_for('register_teacher') }}" class="btn btn-secondary">Cadastro de Professor</a>
+</div>
+{% endblock %}

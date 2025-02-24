@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Cadastro de Professor{% endblock %}
+{% block content %}
+<h1>Cadastro de Professor</h1>
+<form method="POST" action="{{ url_for('register_teacher') }}">
+  <div class="form-group">
+    <label for="name">Nome</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Seu nome" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Seu email" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Senha</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Sua senha" required>
+  </div>
+  <div class="form-group">
+    <label for="teacher_code">Código de Acesso para Professor</label>
+    <input type="text" class="form-control" id="teacher_code" name="teacher_code" placeholder="Informe o código" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
+<p class="mt-2">Já tem conta? <a href="{{ url_for('login') }}">Faça login</a></p>
+{% endblock %}
